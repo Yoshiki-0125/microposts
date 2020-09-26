@@ -39,8 +39,10 @@ class UsersController < ApplicationController
     counts(@user)
   end
   
-  def feed_microposts
-    Micropost.where(user_id: self.following_ids + [self.id])
+  def likes
+    @user = User.find(params[:id])
+    @likes = @user.likes.page(params[:page])
+    counts(@user)
   end
   
   private
